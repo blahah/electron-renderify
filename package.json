@@ -1,0 +1,27 @@
+{
+  "name": "electron-renderify",
+  "version": "0.0.0",
+  "description": "electron-renderify",
+  "main": "index.js",
+  "scripts": {
+    "test": "faucet test.js"
+  },
+  "dependencies": {
+    "through2": "^2.0.3"
+  },
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "faucet": "0.0.1",
+    "tape": "^4.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blahah/electron-renderify.git"
+  },
+  "author": "Rik Smith-Unna (@blahah)",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/blahah/electron-renderify/issues"
+  },
+  "homepage": "https://github.com/blahah/electron-renderify"
+}
