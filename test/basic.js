@@ -7,8 +7,8 @@ test('replaces all blacklisted requires, leaving others intact', function (t) {
   t.plan(1)
 
   browserify()
-    .transform(require('./index'))
-    .add(path.join(__dirname, 'sample.js'))
+    .transform(require('../index'))
+    .add(path.join(__dirname, '..', 'sample.js'))
     .bundle()
     .pipe(through(ondata, onend))
 

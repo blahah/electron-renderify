@@ -4,13 +4,14 @@
   "description": "electron-renderify",
   "main": "index.js",
   "scripts": {
-    "test": "faucet test.js"
+    "test": "faucet"
   },
   "dependencies": {
     "through2": "^2.0.3"
   },
   "devDependencies": {
     "browserify": "^14.4.0",
+    "electron": "^1.7.9",
     "faucet": "0.0.1",
     "tape": "^4.7.0"
   },
