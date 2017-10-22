@@ -18,7 +18,6 @@ module.exports = function (file) {
   function onend (cb) {
     var replaced = replace(data)
     this.push(replaced)
-    console.log('REPLACED\n', replaced)
     cb()
   }
 }
