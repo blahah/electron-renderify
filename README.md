@@ -23,6 +23,23 @@ npm install electron-renderify
 
 ## Usage
 
+This module is to be used as a [browserify]() transform.
+
+Depending on what is in your bundle, and how you are setting up Electron, you may need to apply some or all of the following browserify settings:
+
+```js
+{
+  builtins: [],
+  commonDir: false,
+  detectGlobals: false,
+  ignoreMissing: true,
+  insertGlobalVars: 'global',
+  browserField: false
+}
+```
+
+The best place to apply the settings is in your `package.json`. That way they will take effect with either CLI or JS api use.
+
 ### CLI
 
 ```bash
