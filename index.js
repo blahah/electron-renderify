@@ -3,36 +3,7 @@
 var through = require('through2')
 var path = require('path')
 
-module.exports = function (file) {
-  var data = ''
-
-  return (path.extname(file) === '.json')
-    ? through()
-    : through(ondata, onend)
-
-  function ondata (d, enc, cb) {
-    data += d
-    cb()
-  }
-
-  function onend (cb) {
-    var replaced = replace(data)
-    this.push(replaced)
-    cb()
-  }
-}
-
-function replace (code) {
-  return code.replace(/\srequire\(([^\)]+)\)/g, function (match, mod) {
-    if (blacklisted(mod)) {
-      return ' window.require(' + mod + ')'
-    } else {
-      return match
-    }
-  })
-}
-
-var blacklist = [
+var defaultBlacklist = [
   'assert',
   'buffer',
   'child_process',
@@ -74,6 +45,39 @@ var blacklist = [
   '_process'
 ]
 
-function blacklisted (mod) {
-  return blacklist.indexOf(mod.replace(/['"]+/g, '')) !== -1
+module.exports = function (file, opts) {
+  var data = ''
+
+  if (!opts) opts = { windowRequire: [] }
+
+  var blacklist = defaultBlacklist.concat(opts.windowRequire)
+
+  return (path.extname(file) === '.json')
+    ? through()
+    : through(ondata, onend)
+
+  function ondata (d, enc, cb) {
+    data += d
+    cb()
+  }
+
+  function onend (cb) {
+    var replaced = replace(data)
+    this.push(replaced)
+    cb()
+  }
+
+  function blacklisted (mod) {
+    return blacklist.indexOf(mod.replace(/['"]+/g, '')) !== -1
+  }
+
+  function replace (code) {
+    return code.replace(/\srequire\(([^\)]+)\)/g, function (match, mod) {
+      if (blacklisted(mod)) {
+        return ' window.require(' + mod + ')'
+      } else {
+        return match
+      }
+    })
+  }
 }

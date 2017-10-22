@@ -61,6 +61,40 @@ browserify()
   .pipe(process.stdout)
 ```
 
+## Options
+
+You can modify the behaviour of `electron-renderify` by passing options to the transform, like this:
+
+```js
+browserify()
+  .transform(renderify, opts)
+```
+
+The following options are available:
+
+### `opts.windowRequire` [Array[String]]
+
+An array of strings, each of which specifies a module that should use `window.require` instead of plain `require`. This might be required for any native modules (although you should consider moving any such dependencies to the main process).
+
+Example:
+
+```js
+var browserify = require('browserify')
+var renderify = require('electron-renderify')
+
+var path = require('path')
+
+var renderifyOpts = {
+  windowRequire: ['leveldown']
+}
+
+browserify()
+  .transform(renderify, renderifyOpts)
+  .add('somefile-requiring-leveldown.js')
+  .bundle()
+  .pipe(process.stdout)
+```
+
 ## License
 
 To the extent possible by law, we transfer any rights we have in this code to the public domain. Specifically, we do so using the [CC0 1.0 Universal Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/).
