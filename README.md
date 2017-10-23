@@ -15,7 +15,7 @@
 
 ---
 
-Prefix calls `require` as `window.require` for node and electron built-in modules.  This allows them to work as you would expect in electron processes.
+Prefix calls to `require` as `window.require` for node and electron built-in modules.  This allows them to work as you would expect in electron processes.
 
 ## Install
 
